@@ -1,24 +1,22 @@
-Attendance App 
-    2.1 Account	
+Attendance App
+    2.1 Account
 	2.1.1 Create an account for students and professors
 	2.1.2 Update account information for students and professors
-	2.1.3 Create special priveleges for professor accounts
+	2.1.3 Create special privileges for professor accounts
 	2.1.4 Update database with username and password
 	2.1.5 Forgot password option via email recovery (optional)
 	2.1.6 Auto sign in (optional)
-	
-    2.2 Professor's settings (after sign in)	
-	2.2.1 Create a class 	
+
+    2.2 Professor's settings (after sign in)
+	2.2.1 Create a class
 	2.2.2 Set class size
 	2.2.3 Set class timings
-	2.2.4 Remove class 
+	2.2.4 Remove class
 	2.2.5 Change class timings
 	2.2.6 Generate code for attendance
-	
-    2.3 Student settings (after sign in)		
-	2.3.1 Process code for attendace 
+
+    2.3 Student settings (after sign in)
+	2.3.1 Process code for attendance
 
     2.4
 	2.4.1 Location based setting for student
-	
-	
