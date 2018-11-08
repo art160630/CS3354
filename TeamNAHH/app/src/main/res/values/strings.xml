@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TeamNAHH</string>
+    <string name="attendance">Attendance</string>
+    <string name="userSignup">New User? Sign Up!</string>
+</resources>
