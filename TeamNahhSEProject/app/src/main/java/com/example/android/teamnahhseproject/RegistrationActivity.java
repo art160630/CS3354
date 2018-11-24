@@ -1,6 +1,7 @@
 package com.example.android.teamnahhseproject;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,8 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 
 public class RegistrationActivity extends AppCompatActivity {
     private EditText userName, userPassword, userEmail;
@@ -23,8 +23,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
 
-    FirebaseDatabase database;
-    //DatabaseReference dref = database.getReference("message");
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference reference = database.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,6 @@ public class RegistrationActivity extends AppCompatActivity {
         setupUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
 
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +42,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
 
-                    //dref.setValue("AAAHHFJHFFJ");
+                    reference.child("message").setValue("SMD");
 
                     firebaseAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override

@@ -1,4 +1,0 @@
-#Thu Nov 08 11:25:08 CST 2018
-base.0=/Users/alisha/Desktop/cs 3354/CS3354-NAHH/TeamNAHH/app/build/intermediates/transforms/dexMerger/debug/2
-path.0=classes.dex
-renamed.0=classes.dex
