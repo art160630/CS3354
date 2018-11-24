@@ -14,12 +14,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrationActivity extends AppCompatActivity {
     private EditText userName, userPassword, userEmail;
     private Button regButton;
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
+
+    FirebaseDatabase database;
+    //DatabaseReference dref = database.getReference("message");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +33,8 @@ public class RegistrationActivity extends AppCompatActivity {
         setupUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +42,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     //upload data to the database
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
+
+                    //dref.setValue("AAAHHFJHFFJ");
 
                     firebaseAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -46,6 +56,12 @@ public class RegistrationActivity extends AppCompatActivity {
                             }
                         }
                     });
+
+                    // Write a message to the database
+
+//                    dref = database.getReference("users/" + firebaseAuth.getUid());
+//                    dref.setValue("{" +
+//                            "email:" + user_email + "}");
                 }
             }
         });
