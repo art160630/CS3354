@@ -56,11 +56,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
 
-                    // Write a message to the database
-
-//                    dref = database.getReference("users/" + firebaseAuth.getUid());
-//                    dref.setValue("{" +
-//                            "email:" + user_email + "}");
                 }
             }
         });
