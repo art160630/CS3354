@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+
 public class SecondActivity extends AppCompatActivity {
     private Button returnBack;
     private Button attendanceHistory;
+    private Button attend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +19,8 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
         returnBack = (Button) findViewById(R.id.btnReturn);
         attendanceHistory = (Button) findViewById(R.id.attendance);
+        //TODO: change these button names jfc
+        attend = (Button) findViewById(R.id.button2);
 
         returnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +35,17 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SecondActivity.this, AttendanceHistoryStudent.class);
                 startActivity(intent);
+            }
+        });
+
+        attend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentIntegrator integrator = new IntentIntegrator(SecondActivity.this);
+//                integrator.setOrientationLocked(false);
+                integrator.setPrompt("Scan QR Code");
+                integrator.setCameraId(0);  // Use a specific camera of the device
+                integrator.initiateScan();
             }
         });
     }
