@@ -15,7 +15,7 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     DatabaseReference referenceVar = database.getReference("student_users/"+firebaseAuth.getUid()+"/Classes/CS_3345_003");
-    String attendance_text;
+    String attendanceText;
     TextView textBox;
 
     @Override
@@ -29,10 +29,10 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    attendance_text = postSnapshot.getKey();
-                    textBox.append(attendance_text + "\t");
-                    attendance_text = postSnapshot.getValue(String.class);
-                    textBox.append(attendance_text + "\n");
+                    attendanceText = postSnapshot.getKey();
+                    textBox.append(attendanceText + "\t");
+                    attendanceText = postSnapshot.getValue(String.class);
+                    textBox.append(attendanceText + "\n");
                 }
             }
             @Override
