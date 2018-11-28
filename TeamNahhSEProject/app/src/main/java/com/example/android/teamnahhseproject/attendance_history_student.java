@@ -5,40 +5,38 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.google.firebase.*;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
 public class attendance_history_student extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference reference = database.getReference("student_users/Alisha Tapiawala");
-    String email;
-    TextView emailText;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    DatabaseReference reference = database.getReference("student_users/"+firebaseAuth.getUid()+"/classes/CS 3354_003");
+    String attendance_text;
+    TextView textBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_history_student);
 
-        emailText = (TextView) findViewById(R.id.emailSlot);
+        textBox = findViewById(R.id.attendance);
 
-        reference.child("email").addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                email = dataSnapshot.getValue(String.class);
-                emailText.setText(email);
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    attendance_text = postSnapshot.getKey();
+                    textBox.append(attendance_text + "\t");
+                    attendance_text = postSnapshot.getValue(String.class);
+                    textBox.append(attendance_text + "\n");
+                }
             }
-
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-            }
+            public void onCancelled(DatabaseError databaseError) { }
         });
     }
 }

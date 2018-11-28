@@ -23,9 +23,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference reference = database.getReference();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +36,8 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(validate()){
                     //upload data to the database
-                    String user_email = userEmail.getText().toString().trim();
+                    final String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
-
-                    reference.child("message").setValue("SMD");
 
                     firebaseAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
