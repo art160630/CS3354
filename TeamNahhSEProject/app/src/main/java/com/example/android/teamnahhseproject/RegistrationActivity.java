@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button regButton;
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
+    private RadioButton studentButton, instructorButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class RegistrationActivity extends AppCompatActivity {
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(validate()){
                     //upload data to the database
                     String user_email = userEmail.getText().toString().trim();
@@ -41,22 +44,17 @@ public class RegistrationActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             final String name = userName.getText().toString().trim();
                             final String email = userEmail.getText().toString().trim();
-                            final String status = "Student";
                             if (task.isSuccessful()){
                                 Toast.makeText(RegistrationActivity.this, "The registration was successful!!", Toast.LENGTH_SHORT).show();
-                                User user = new User(name, email, status);
+                                User user = new User(name, email);
 
-                                FirebaseDatabase.getInstance().getReference("Users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            Toast.makeText(RegistrationActivity.this, "it worked", Toast.LENGTH_LONG).show();
-                                        } else {
-                                            Toast.makeText(RegistrationActivity.this, "did not work", Toast.LENGTH_LONG).show();
+                                        if(studentButton.isChecked()){
+                                            FirebaseDatabase.getInstance().getReference("student_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
                                         }
-                                    }                                });
+                                        else if (instructorButton.isChecked()){
+                                            FirebaseDatabase.getInstance().getReference("instructor_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
+                                        }
+
                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                             } else {
                                 Toast.makeText(RegistrationActivity.this, "Registration failed, try again later!", Toast.LENGTH_SHORT).show();

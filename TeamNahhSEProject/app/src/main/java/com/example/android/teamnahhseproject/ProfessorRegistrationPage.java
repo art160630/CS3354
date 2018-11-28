@@ -49,7 +49,7 @@ public class ProfessorRegistrationPage extends AppCompatActivity {
                                 final String email = userEmail.getText().toString().trim();
                                 final String status = "Professor";
 
-                                User user = new User(name, email, status);
+                                User user = new User(name, email);
 
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
