@@ -2,8 +2,8 @@ package com.example.android.teamnahhseproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -14,7 +14,7 @@ public class attendance_history_student extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    DatabaseReference reference = database.getReference("student_users/"+firebaseAuth.getUid()+"/classes/CS 3354_003");
+    DatabaseReference reference = database.getReference("student_users/"+firebaseAuth.getUid()+"/Classes/CS_3354_003");
     String attendance_text;
     TextView textBox;
 

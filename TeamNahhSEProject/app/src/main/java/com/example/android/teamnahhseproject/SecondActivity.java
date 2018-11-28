@@ -8,16 +8,27 @@ import android.widget.Button;
 
 public class SecondActivity extends AppCompatActivity {
     private Button returnBack;
+    private Button attendanceHistory;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         returnBack = (Button) findViewById(R.id.btnReturn);
+        attendanceHistory = (Button) findViewById(R.id.attendance);
 
         returnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        attendanceHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SecondActivity.this, attendance_history_student.class);
                 startActivity(intent);
             }
         });
