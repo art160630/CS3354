@@ -22,7 +22,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private Button regButton;
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
-    private RadioButton studentButton, instructorButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,26 +34,20 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(validate()){
+                if (validate()) {
                     //upload data to the database
                     String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
 
-                    firebaseAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    firebaseAuth.createUserWithEmailAndPassword(user_email, user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             final String name = userName.getText().toString().trim();
                             final String email = userEmail.getText().toString().trim();
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 Toast.makeText(RegistrationActivity.this, "The registration was successful!!", Toast.LENGTH_SHORT).show();
                                 User user = new User(name, email);
-
-                                        if(studentButton.isChecked()){
-                                            FirebaseDatabase.getInstance().getReference("student_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
-                                        }
-                                        else if (instructorButton.isChecked()){
-                                            FirebaseDatabase.getInstance().getReference("instructor_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
-                                        }
+                                FirebaseDatabase.getInstance().getReference("student_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
 
                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                             } else {
@@ -72,21 +66,23 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
-    private void setupUIViews(){
-        userName = (EditText)findViewById(R.id.etUserName);
+
+    private void setupUIViews() {
+        userName = (EditText) findViewById(R.id.etUserName);
         userEmail = findViewById(R.id.etEmail);
-        userPassword = (EditText)findViewById(R.id.etPassword);
+        userPassword = (EditText) findViewById(R.id.etPassword);
         regButton = findViewById(R.id.btnRegister);
         userLogin = findViewById(R.id.tvReturn);
 
     }
-    private Boolean validate(){
+
+    private Boolean validate() {
         Boolean result = false;
         String name = userName.getText().toString();
         String password = userPassword.getText().toString();
         String email = userEmail.getText().toString();
 
-        if(name.isEmpty() || password.isEmpty() || email.isEmpty()){
+        if (name.isEmpty() || password.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         } else {
             result = true;
