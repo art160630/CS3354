@@ -21,8 +21,7 @@
         <activity android:name=".ProfessorOrStudent" />
         <activity android:name=".ProfessorActivity" />
         <activity android:name=".ProfessorSignUp" />
-        <activity android:name=".ProfessorRegistrationPage" />
-        <activity android:name=".attendance_history_student"></activity>
+        <activity android:name=".ProfessorRegistrationPage"></activity>
     </application>
 
 </manifest>

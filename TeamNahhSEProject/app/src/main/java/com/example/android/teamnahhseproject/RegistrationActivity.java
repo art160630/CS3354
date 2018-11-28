@@ -1,7 +1,6 @@
 package com.example.android.teamnahhseproject;
 
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,14 +14,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.*;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegistrationActivity extends AppCompatActivity {
     private EditText userName, userPassword, userEmail;
     private Button regButton;
     private TextView userLogin;
     private FirebaseAuth firebaseAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,27 +28,41 @@ public class RegistrationActivity extends AppCompatActivity {
         setupUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
-
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(validate()){
                     //upload data to the database
-                    final String user_email = userEmail.getText().toString().trim();
+                    String user_email = userEmail.getText().toString().trim();
                     String user_password = userPassword.getText().toString().trim();
 
                     firebaseAuth.createUserWithEmailAndPassword(user_email,user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
+                            final String name = userName.getText().toString().trim();
+                            final String email = userEmail.getText().toString().trim();
+                            final String status = "Student";
                             if (task.isSuccessful()){
                                 Toast.makeText(RegistrationActivity.this, "The registration was successful!!", Toast.LENGTH_SHORT).show();
+                                User user = new User(name, email, status);
+
+                                FirebaseDatabase.getInstance().getReference("Users")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(RegistrationActivity.this, "it worked", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            Toast.makeText(RegistrationActivity.this, "did not work", Toast.LENGTH_LONG).show();
+                                        }
+                                    }                                });
                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                             } else {
                                 Toast.makeText(RegistrationActivity.this, "Registration failed, try again later!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
-
                 }
             }
         });
