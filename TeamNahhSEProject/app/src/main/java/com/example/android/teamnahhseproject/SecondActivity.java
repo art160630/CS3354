@@ -28,7 +28,7 @@ public class SecondActivity extends AppCompatActivity {
         attendanceHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SecondActivity.this, attendance_history_student.class);
+                Intent intent = new Intent(SecondActivity.this, AttendanceHistoryStudent.class);
                 startActivity(intent);
             }
         });
