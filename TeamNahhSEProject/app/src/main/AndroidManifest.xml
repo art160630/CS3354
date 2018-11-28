@@ -27,7 +27,7 @@
         android:stateNotNeeded="true"/>
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".ProfessorOrStudent" />
-        <activity android:name=".ProfessorActivity" />
+        <activity android:name=".ProfessorValidationActivity" />
         <activity android:name=".ProfessorRegistrationPage" />
         <activity android:name=".AttendanceHistoryStudent">
         </activity>

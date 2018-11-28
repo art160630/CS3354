@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ProfessorActivity extends AppCompatActivity {
+public class ProfessorValidationActivity extends AppCompatActivity {
 
     private EditText proveProfessor;
     private Button validate;
@@ -18,7 +18,7 @@ public class ProfessorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_professor);
+        setContentView(R.layout.activity_professor_validation);
         proveProfessor = (EditText) findViewById(R.id.etValidateProfessor);
         validate = (Button) findViewById(R.id.btnValidate);
         returnLogin = (TextView) findViewById(R.id.tvReturnLogin);
@@ -36,7 +36,7 @@ public class ProfessorActivity extends AppCompatActivity {
         returnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfessorActivity.this, MainActivity.class);
+                Intent intent = new Intent(ProfessorValidationActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -46,10 +46,10 @@ public class ProfessorActivity extends AppCompatActivity {
     }
     private void validate(String pass){
         if(pass.equals("1234")){
-            Intent intent = new Intent(ProfessorActivity.this, ProfessorRegistrationPage.class);
+            Intent intent = new Intent(ProfessorValidationActivity.this, ProfessorRegistrationPage.class);
             startActivity(intent);
         } else {
-            Toast.makeText(ProfessorActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfessorValidationActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
         }
     }
 }
