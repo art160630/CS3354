@@ -6,21 +6,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class SecondActivity extends AppCompatActivity {
+public class StudentActivity extends AppCompatActivity {
     private Button returnBack;
     private Button attendanceHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_student);
         returnBack = (Button) findViewById(R.id.btnReturn);
         attendanceHistory = (Button) findViewById(R.id.attendance);
 
         returnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                Intent intent = new Intent(StudentActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -28,7 +28,7 @@ public class SecondActivity extends AppCompatActivity {
         attendanceHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SecondActivity.this, AttendanceHistoryStudent.class);
+                Intent intent = new Intent(StudentActivity.this, AttendanceHistoryStudent.class);
                 startActivity(intent);
             }
         });
