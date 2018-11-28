@@ -14,7 +14,7 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    DatabaseReference referenceVar = database.getReference("student_users/"+firebaseAuth.getUid()+"/Classes/CS_3354_003");
+    DatabaseReference referenceVar = database.getReference("student_users/"+firebaseAuth.getUid()+"/Classes/CS_3345_003");
     String attendance_text;
     TextView textBox;
 
@@ -23,7 +23,7 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_history_student);
 
-        textBox = findViewById(R.id.attendance);
+        textBox = findViewById(R.id.textBox);
 
         referenceVar.addValueEventListener(new ValueEventListener() {
             @Override
