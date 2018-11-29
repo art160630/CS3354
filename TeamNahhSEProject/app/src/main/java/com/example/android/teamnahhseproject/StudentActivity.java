@@ -93,7 +93,6 @@ public class StudentActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (result.getContents().equals(dataSnapshot.getValue(String.class))) {
-                            Toast.makeText(StudentActivity.this, "ASS", Toast.LENGTH_LONG).show();
                             Date date = new Date();
                             referenceWrite.child(date.toString()).setValue("present");
                         }
