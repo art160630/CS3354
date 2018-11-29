@@ -82,6 +82,8 @@ public class ProfessorActivity extends AppCompatActivity {
 
     }
 
+//This code was created by Juned Mughal at AndroidStudios.com:
+//    https://www.android-examples.com/generate-qr-code-in-android-using-zxing-library-in-android-studio/
     Bitmap TextToImageEncode(String Value) throws WriterException {
         BitMatrix bitMatrix;
         try {
