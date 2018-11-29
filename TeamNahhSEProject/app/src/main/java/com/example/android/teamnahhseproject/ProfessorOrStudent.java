@@ -29,7 +29,7 @@ public class ProfessorOrStudent extends AppCompatActivity {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfessorOrStudent.this, ProfessorActivity.class);
+                Intent intent = new Intent(ProfessorOrStudent.this, ProfessorValidationActivity.class);
                 startActivity(intent);
             }
         });
