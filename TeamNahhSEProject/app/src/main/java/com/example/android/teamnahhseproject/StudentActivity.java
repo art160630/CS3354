@@ -32,8 +32,8 @@ public class StudentActivity extends AppCompatActivity {
     String dateString;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference reference = database.getReference("code");
-    private DatabaseReference reference2 = database.getReference("student_users/"+auth.getUid()+"Classes/CS_3345_003");
+    private DatabaseReference referenceRead = database.getReference("code");
+    private DatabaseReference referenceWrite = database.getReference("student_users/"+auth.getUid()+"/Classes/CS_3345_003");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +81,13 @@ public class StudentActivity extends AppCompatActivity {
             if (result.getContents() == null) {
                 Toast.makeText(StudentActivity.this, "Scanning Error", Toast.LENGTH_LONG).show();
             } else {
-                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                referenceRead.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (result.getContents() == dataSnapshot.getValue(String.class)) {
+                        if (result.getContents().equals(dataSnapshot.getValue(String.class))) {
+                            Toast.makeText(StudentActivity.this, "ASS", Toast.LENGTH_LONG).show();
                             Date date = new Date();
-                            reference2.child(date.toString()).setValue("present");
+                            referenceWrite.child(date.toString()).setValue("present");
                         }
                     }
 
