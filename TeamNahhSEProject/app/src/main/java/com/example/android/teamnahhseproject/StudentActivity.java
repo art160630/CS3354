@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,13 +19,21 @@ import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.CaptureActivity;
 import android.widget.Toast;
 
+import java.util.Date;
+
+// QR Scanner code was created with the ZXing Android application, created by JourneyApps:
+//        https://github.com/journeyapps/zxing-android-embedded
+
 public class StudentActivity extends AppCompatActivity {
 
     private Button returnBack;
     private Button attendanceHistory;
     private Button attend;
+    String dateString;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference reference = database.getReference("code");
+    private DatabaseReference reference2 = database.getReference("student_users/"+auth.getUid()+"Classes/CS_3345_003");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +85,8 @@ public class StudentActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (result.getContents() == dataSnapshot.getValue(String.class)) {
-                            
+                            Date date = new Date();
+                            reference2.child(date.toString()).setValue("present");
                         }
                     }
 

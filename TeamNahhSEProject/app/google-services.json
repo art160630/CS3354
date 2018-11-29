@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "672711011102",
+    "firebase_url": "https://teamnahhseproject.firebaseio.com",
+    "project_id": "teamnahhseproject",
+    "storage_bucket": "teamnahhseproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672711011102:android:5e8536e76dbf5130",
+        "android_client_info": {
+          "package_name": "com.example.android.teamnahhseproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "672711011102-1elaldvenst4g05iuom3s51n2569fcmu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.teamnahhseproject",
+            "certificate_hash": "f5dd4da69bfc6f33fb5ae116e810cb954a8b8b42"
+          }
+        },
+        {
+          "client_id": "672711011102-u1b0dodvif8g519v12tvfb5k2tvbtcat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn-z5WVfcUC-aeDPLJxA6ZrlbQJnpvsHo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "672711011102-u1b0dodvif8g519v12tvfb5k2tvbtcat.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
