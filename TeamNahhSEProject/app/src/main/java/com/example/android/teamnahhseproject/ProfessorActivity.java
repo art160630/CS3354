@@ -21,7 +21,7 @@ import android.net.Uri;
 import java.util.Random;
 
 public class ProfessorActivity extends AppCompatActivity {
-    private Button attendanceHistory, qrGenerator, classes;
+    private Button attendanceHistory, qrGenerator, classes, logOut;
     private TextView currentClass;
     private ImageView imageView;
     private FirebaseDatabase database;
@@ -40,6 +40,7 @@ public class ProfessorActivity extends AppCompatActivity {
         attendanceHistory = (Button) findViewById(R.id.attendance_history);
         qrGenerator = (Button) findViewById(R.id.generate_qr);
         classes = (Button) findViewById(R.id.choose_class);
+        logOut = (Button) findViewById(R.id.log_out);
         currentClass = (TextView) findViewById(R.id.current_class);
         imageView = (ImageView) findViewById(R.id.imageView);
 
@@ -77,6 +78,14 @@ public class ProfessorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfessorActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 

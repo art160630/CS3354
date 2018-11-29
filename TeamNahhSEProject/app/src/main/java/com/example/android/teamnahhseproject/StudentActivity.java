@@ -26,9 +26,10 @@ import java.util.Date;
 
 public class StudentActivity extends AppCompatActivity {
 
-    private Button returnBack;
+    private Button classes;
     private Button attendanceHistory;
     private Button attend;
+    private Button logOut;
     String dateString;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -39,16 +40,15 @@ public class StudentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student);
-        returnBack = (Button) findViewById(R.id.btnReturn);
+        classes = (Button) findViewById(R.id.classes);
         attendanceHistory = (Button) findViewById(R.id.attendance);
+        logOut = (Button) findViewById(R.id.log_out);
         //TODO: change these button names jfc
         attend = (Button) findViewById(R.id.button2);
 
-        returnBack.setOnClickListener(new View.OnClickListener() {
+        classes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentActivity.this, MainActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -70,6 +70,14 @@ public class StudentActivity extends AppCompatActivity {
                 integrator.setCameraId(0);  // Use a specific camera of the device
                 integrator.initiateScan();
 
+            }
+        });
+
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(StudentActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
