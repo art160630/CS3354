@@ -5,14 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-<<<<<<< HEAD:TeamNahhSEProject/app/src/main/java/com/example/android/teamnahhseproject/StudentActivity.java
-public class StudentActivity extends AppCompatActivity {
-=======
 import com.google.zxing.integration.android.IntentIntegrator;
 
-public class SecondActivity extends AppCompatActivity {
->>>>>>> 8734af228e407413245bd551c8e8db0eeeecfc89:TeamNahhSEProject/app/src/main/java/com/example/android/teamnahhseproject/SecondActivity.java
+public class StudentActivity extends AppCompatActivity {
+
     private Button returnBack;
     private Button attendanceHistory;
     private Button attend;
@@ -42,11 +38,11 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
+
         attend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentIntegrator integrator = new IntentIntegrator(SecondActivity.this);
-//                integrator.setOrientationLocked(false);
+                IntentIntegrator integrator = new IntentIntegrator(StudentActivity.this);
                 integrator.setPrompt("Scan QR Code");
                 integrator.setCameraId(0);  // Use a specific camera of the device
                 integrator.initiateScan();
