@@ -21,7 +21,7 @@ public class AddClassStudentActivity extends AppCompatActivity {
     private boolean found;
     String name, s1, s2, s3;
     FirebaseDatabase database;
-    DatabaseReference reference1, reference2, reference3;
+    DatabaseReference referenceClasses, referenceStudents, referenceName, referenceStudentAdd;
     FirebaseAuth auth;
 
     @Override
@@ -32,16 +32,16 @@ public class AddClassStudentActivity extends AppCompatActivity {
         classInfo = findViewById(R.id.class_text);
         semesterInfo = findViewById(R.id.semester_text);
         database = FirebaseDatabase.getInstance();
-        reference1 = database.getReference("classes");
+        referenceClasses = database.getReference("classes");
         auth = FirebaseAuth.getInstance();
-        reference3 = database.getReference("student_users").child(auth.getUid()).child("name");
+        referenceName = database.getReference("student_users").child(auth.getUid()).child("name");
 
          s1 = classInfo.getText().toString();
          s2 = semesterInfo.getText().toString();
          s3 = s1 + " " + s2;
 
         if(validate(s1, s2)) {
-            reference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            referenceClasses.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
@@ -57,7 +57,7 @@ public class AddClassStudentActivity extends AppCompatActivity {
             });
 
             if(found) {
-                reference3.addListenerForSingleValueEvent(new ValueEventListener() {
+                referenceName.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         name = dataSnapshot.getValue(String.class);
@@ -66,12 +66,16 @@ public class AddClassStudentActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) { }
                 });
-                reference2 = database.getReference("classes").child(s3).child("students").child(auth.getUid());
-                reference2.setValue(name);
+                referenceStudents = database.getReference("classes").child(s3).child("students").child(auth.getUid());
+                referenceStudents.setValue(name);
+                referenceStudentAdd = database.getReference("student_users").child(auth.getUid()).child("Classes").child(s3).child("date0");
+                referenceStudentAdd.setValue("-");
+                Toast.makeText(AddClassStudentActivity.this, "Class was successfully added.", Toast.LENGTH_SHORT).show();
+
 
             }
             else {
-                Toast.makeText(this, "That class was not found.", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddClassStudentActivity.this, "Class was not found.", Toast.LENGTH_SHORT).show();
             }
 
 
