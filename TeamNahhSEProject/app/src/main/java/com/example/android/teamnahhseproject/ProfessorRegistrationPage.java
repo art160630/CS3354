@@ -50,7 +50,7 @@ public class ProfessorRegistrationPage extends AppCompatActivity {
                                 FirebaseDatabase.getInstance().getReference("instructor_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
                                 FirebaseDatabase.getInstance().getReference("instructor_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Classes").child("class0").setValue("-");
 
-                                startActivity(new Intent(ProfessorRegistrationPage.this, MainActivity.class));
+                                startActivity(new Intent(ProfessorRegistrationPage.this, AddClassProfessor.class));
                             } else {
                                 Toast.makeText(ProfessorRegistrationPage.this, "Registration failed, try again later!", Toast.LENGTH_SHORT).show();
                             }

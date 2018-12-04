@@ -34,21 +34,18 @@ public class AddClassProfessor extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         referenceInstructor = database.getReference("instructor_users").child(auth.getUid()).child("Classes");
 
-        classString = classInfo.getText().toString();
-        semesterString = semesterInfo.getText().toString();
-        combinedString = classString + " " + semesterString;
-
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                classString = classInfo.getText().toString();
+                semesterString = semesterInfo.getText().toString();
+                combinedString = classString.concat(" ").concat(semesterString);
+                
                 if(validate(classString, semesterString)){
-                    referenceNewClass.child(combinedString).child("Instructor ID").setValue(auth.getUid());
+                    referenceNewClass.child(combinedString).child("Instructor ID").setValue(auth.getCurrentUser().getUid());
                     referenceNewClass.child(combinedString).child("students").child("student0").setValue("-");
                     referenceInstructor.child(combinedString).setValue("");
-                    Toast.makeText(AddClassProfessor.this, "Class could not be added successfully.", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(AddClassProfessor.this, "Class could not be added.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddClassProfessor.this, "Class added successfully.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

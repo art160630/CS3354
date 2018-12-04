@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 }
                                 else if (instructorButton.isChecked()) {
-                                    Intent intent = new Intent(MainActivity.this, ProfessorActivity.class);
+                                    Intent intent = new Intent(MainActivity.this, AddClassProfessor.class);
                                     finish();
                                     startActivity(intent);
                                 }
