@@ -78,8 +78,6 @@ public class AddClassStudentActivity extends AppCompatActivity {
                         referenceStudentAdd = database.getReference("student_users").child(auth.getUid()).child("Classes").child(combinedString).child("date0");
                         referenceStudentAdd.setValue("-");
                         Toast.makeText(AddClassStudentActivity.this, "Class was successfully added.", Toast.LENGTH_SHORT).show();
-
-
                     }
                     else {
                         Toast.makeText(AddClassStudentActivity.this, "Class was not found.", Toast.LENGTH_SHORT).show();
@@ -91,7 +89,9 @@ public class AddClassStudentActivity extends AppCompatActivity {
         });
 
 
-    }private Boolean validate(String s1, String s2) {
+    }
+
+    private Boolean validate(String s1, String s2) {
         Boolean result = false;
 
         if (s1.isEmpty() || s2.isEmpty()) {
