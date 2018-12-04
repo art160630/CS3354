@@ -48,6 +48,7 @@ public class ProfessorRegistrationPage extends AppCompatActivity {
                                 Toast.makeText(ProfessorRegistrationPage.this, "The registration was successful!!", Toast.LENGTH_SHORT).show();
                                 User user = new User(name, email);
                                 FirebaseDatabase.getInstance().getReference("instructor_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
+                                FirebaseDatabase.getInstance().getReference("instructor_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Classes").child("class0").setValue("-");
 
                                 startActivity(new Intent(ProfessorRegistrationPage.this, MainActivity.class));
                             } else {
