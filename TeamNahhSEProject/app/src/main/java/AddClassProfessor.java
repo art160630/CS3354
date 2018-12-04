@@ -23,6 +23,7 @@ public class AddClassProfessor extends AppCompatActivity {
 
         classInfo = findViewById(R.id.class_text);
         semesterInfo = findViewById(R.id.semester_text);
+        database = FirebaseDatabase.getInstance();
 
 
     }
