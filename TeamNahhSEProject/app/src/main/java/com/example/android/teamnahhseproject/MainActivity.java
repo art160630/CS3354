@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Sign In failed! Put in a correct Email or Password", Toast.LENGTH_LONG).show();
                             } else {
                                 if (studentButton.isChecked()) {
-                                    Intent intent = new Intent(MainActivity.this, StudentActivity.class);
+                                    Intent intent = new Intent(MainActivity.this, AddClassStudentActivity.class);
                                     finish();
                                     startActivity(intent);
                                 }

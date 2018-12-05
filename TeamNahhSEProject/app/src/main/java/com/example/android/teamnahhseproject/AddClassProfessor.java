@@ -40,7 +40,6 @@ public class AddClassProfessor extends AppCompatActivity {
                 classString = classInfo.getText().toString();
                 semesterString = semesterInfo.getText().toString();
                 combinedString = classString.concat(" ").concat(semesterString);
-                
                 if(validate(classString, semesterString)){
                     referenceNewClass.child(combinedString).child("Instructor ID").setValue(auth.getCurrentUser().getUid());
                     referenceNewClass.child(combinedString).child("students").child("student0").setValue("-");

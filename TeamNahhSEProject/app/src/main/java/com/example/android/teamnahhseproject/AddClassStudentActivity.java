@@ -40,13 +40,14 @@ public class AddClassStudentActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         referenceName = database.getReference("student_users").child(auth.getUid()).child("name");
 
-         classString = classInfo.getText().toString();
-         semesterString = semesterInfo.getText().toString();
-         combinedString = classString + " " + semesterString;
-
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                classString = classInfo.getText().toString();
+                semesterString = semesterInfo.getText().toString();
+                combinedString = classString.concat(" ").concat(semesterString);
+
                 if(validate(classString, semesterString)) {
                     referenceClasses.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
