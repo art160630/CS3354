@@ -21,9 +21,18 @@ import android.widget.Toast;
 
 import java.util.Date;
 
-// QR Scanner code was created with the ZXing Android application, created by JourneyApps:
-//        https://github.com/journeyapps/zxing-android-embedded
-
+/**
+ * The following activity generates the student's page after they login
+ * and contains the ability for the student to access the abilities that
+ * students are given in the app.
+ *
+ * The page allows the student user to scan a QR code access their history
+ * and view a myriad of other things.
+ *
+ * author : Alisha Tapiawala
+ * generate: Nov.30th.2018
+ * version : 1.4
+ */
 public class StudentActivity extends AppCompatActivity {
 
     private Button classes;
@@ -52,6 +61,10 @@ public class StudentActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * if attendance history button is clicked then go to the intent that shows the
+         * attendance history of the student.
+         */
         attendanceHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +74,10 @@ public class StudentActivity extends AppCompatActivity {
         });
 
 
+        /**
+         * if the student clicks on the attend button, then the QR scanner opens
+         * and the student can scan the professors QR code.
+         */
         attend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +90,10 @@ public class StudentActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * if the student clicks on the logout button then they return
+         * back to the login page.
+         */
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +103,10 @@ public class StudentActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * if the scan of the QR code fails, then display a failure message, else
+     * if it works, then update that the student was present
+     */
     @Override
     protected void onActivityResult ( int requestCode, int resultCode, Intent data){
         final IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
