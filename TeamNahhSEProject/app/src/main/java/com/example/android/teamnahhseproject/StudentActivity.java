@@ -37,7 +37,7 @@ public class StudentActivity extends AppCompatActivity {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference referenceRead = database.getReference("code");
-    private DatabaseReference referenceWrite = database.getReference("student_users/"+auth.getUid()+"/Classes/CS_3345_003");
+    private DatabaseReference referenceWrite;
     private DatabaseReference referenceClass = database.getReference("student_users/"+auth.getUid()+"/current_class");
 
     @Override
@@ -48,11 +48,13 @@ public class StudentActivity extends AppCompatActivity {
         attendanceHistory = (Button) findViewById(R.id.attendance);
         logOut = (Button) findViewById(R.id.log_out);
         currentClass = (TextView) findViewById(R.id.current_class);
+
         referenceClass.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentClassString = dataSnapshot.getValue(String.class);
                 currentClass.setText("Current class: "+currentClassString);
+                referenceWrite = database.getReference("student_users/"+auth.getUid()+"/Classes/"+currentClassString);
             }
 
             @Override
