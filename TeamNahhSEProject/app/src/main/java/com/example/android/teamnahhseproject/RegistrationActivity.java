@@ -17,6 +17,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * The following activity is the intent that opens up when the user
+ * selects that they are a student.
+ *
+ * The page allows the user to register a student account in the system.
+ *
+ * author : Nabeel Khan
+ * generate: Nov.28th.2018
+ * version : 1.3
+ */
 public class RegistrationActivity extends AppCompatActivity {
     private EditText userName, userPassword, userEmail;
     private Button regButton;
@@ -30,6 +40,12 @@ public class RegistrationActivity extends AppCompatActivity {
         setupUIViews();
 
         firebaseAuth = FirebaseAuth.getInstance();
+        /**
+         * When the register button is clicked then validate if the user and email
+         * are valid and if they are then register them using Firebase. If the registration
+         * is successful then display a Toast that says that the registration was successful
+         * and if it fails then repeat the same process.
+         */
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +77,9 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * If the user hits the button return, then return them back to the home page.
+         */
         userLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +97,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * The following method validates whether the user has entered all the credentials
+     * needed to create a new user. The user needs to enter a Name, Email, and password, and
+     * this method validates that all of that is typed in and not empty.
+     */
     private Boolean validate() {
         Boolean result = false;
         String name = userName.getText().toString();

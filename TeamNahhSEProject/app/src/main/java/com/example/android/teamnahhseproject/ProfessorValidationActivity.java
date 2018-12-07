@@ -9,6 +9,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * The following activity validates if the user is a professor or not.
+ *
+ * The page asks the user to enter in the code and validates it to the
+ * the user has inputted the correct code.
+
+ *
+ * author : Nabeel Khan
+ * generate: Nov.21.2018
+ * version : 1.2
+ */
 public class ProfessorValidationActivity extends AppCompatActivity {
 
     private EditText proveProfessor;
@@ -24,7 +35,10 @@ public class ProfessorValidationActivity extends AppCompatActivity {
         returnLogin = (TextView) findViewById(R.id.tvReturnLogin);
 
 
-
+        /**
+         * begins the method that validates the user's string, and converts the
+         * input of the user into a String
+         */
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +47,9 @@ public class ProfessorValidationActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         *  when the user clicks the "return"  button it returns them back to the login page
+         */
         returnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +61,9 @@ public class ProfessorValidationActivity extends AppCompatActivity {
 
 
     }
+    /**
+     * The following method validates the password that the user enters
+     */
     private void validate(String pass){
         if(pass.equals("1234")){
             Intent intent = new Intent(ProfessorValidationActivity.this, ProfessorRegistrationPage.class);

@@ -16,8 +16,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * The following activity essentially opens up the user's login page
+ * and is considered as the app's "home" page.
+ *
+ * The page has the option for a user to sign in, depending on whether they
+ * are a student or a professor.
+ * The page also offers a new user to create a new account by clicking on the
+ * text box on the bottom of the page.
+ *
+ * author : Nabeel Khan
+ * generate: Oct.10th.2018
+ * version : 1.4
+ */
 public class MainActivity extends AppCompatActivity {
 
+    //establish the entities that are associated with the XML file
     private EditText userEmail;
     private EditText userPassword;
     private Button login;
@@ -32,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //assign the variables we defined earlier to the ones defined in the layout file
         userEmail = (EditText) findViewById(R.id.etUserEmail);
         userPassword = (EditText) findViewById(R.id.etUserPassword);
         login = (Button) findViewById(R.id.btnLogin);
@@ -39,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
         studentButton = (RadioButton) findViewById(R.id.student_radio_button);
         instructorButton = (RadioButton) findViewById(R.id.instructor_radio_button);
 
+        /**
+         * if button "login" is clicked validate the user's email and password and
+         * communicate with the Firebase Database to see if they exist in the
+         * database
+         */
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * if TextView "newUser" is clicked open page that asks them if they are
+         * a professor or a student
+         */
         newUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +105,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Validates whether the user entered both the email and the password, and if they
+     * didn't then inform the user using a Toast
+     */
     private Boolean validate(){
         Boolean result = false;
         String password = userPassword.getText().toString();

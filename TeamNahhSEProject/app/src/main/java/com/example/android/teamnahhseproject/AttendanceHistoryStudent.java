@@ -11,6 +11,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.*;
 
+/**
+ * The following activity is the intent that opens up whenever the student
+ * accesses their attendance history page after signing in.
+ *
+ * The page displays the FireBase data associated with the attendance history
+ * for the student.
+ *
+ * author : Alisha Tapiawala
+ * generate: Nov.30th.2018
+ * version : 1.3
+ */
 public class AttendanceHistoryStudent extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -20,6 +31,7 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
     String attendanceText, currentClass;
     TextView attendanceBox, dateBox;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +40,14 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
         attendanceBox = findViewById(R.id.attendance_box);
         dateBox = findViewById(R.id.date_box);
 
+
         referenceCurrentClass.addValueEventListener(new ValueEventListener() {
+
+        /**
+         * when attendance history button is clicked then traverse through FireBase data
+         * and show data to the student, along with the date
+         */
+        referenceVar.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentClass = dataSnapshot.getValue(String.class);
@@ -49,7 +68,9 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) { }
                 });
             }
-
+            /**
+             * cancel process if the database has an error
+             */
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });

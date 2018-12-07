@@ -25,6 +25,19 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import java.util.Random;
 
+/**
+ * The following activity generates the professor's page and contains the
+ * ability for the professor to access the abilities that professors are given
+ * in the app.
+ *
+ * The page allows the professor user to generate a QR code, access their history
+ * and view a myriad of other things.
+ *
+ * author : Alisha Tapiawala
+ * generate: Nov.25th.2018
+ * version : 1.4
+ */
+
 public class ProfessorActivity extends AppCompatActivity {
     private Button attendanceHistory, qrGenerator, classes, logOut;
     private TextView currentClass;
@@ -57,12 +70,17 @@ public class ProfessorActivity extends AppCompatActivity {
         referenceClass = database.getReference("instructor_users/"+auth.getUid()+"/current_class");
 
 
+        /**
+         * if attendance history button is clicked then show the attedance of the students in the
+         * class chosen.
+         */
         attendanceHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
+
 
         referenceClass.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -75,6 +93,12 @@ public class ProfessorActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
+
+
+        /**
+         * qrGenerator button is clicked, then generate a random code in and display to user the
+         * generated code.
+         */
 
         qrGenerator.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,6 +120,9 @@ public class ProfessorActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * if classes button is clicked then open up the classes that the professor is teaching
+         */
         classes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +130,10 @@ public class ProfessorActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         * if logout button is pressed then log out the professor, and bring them back to
+         * login/user creation screen
+         */
         logOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,8 +144,11 @@ public class ProfessorActivity extends AppCompatActivity {
 
     }
 
-//This code was created by Juned Mughal at AndroidStudios.com:
-//    https://www.android-examples.com/generate-qr-code-in-android-using-zxing-library-in-android-studio/
+
+    /**
+     * The code below is used to generate the QR code and all the aspects that are associated
+     * with that.
+     */
     Bitmap TextToImageEncode(String Value) throws WriterException {
         BitMatrix bitMatrix;
         try {
