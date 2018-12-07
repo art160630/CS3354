@@ -99,7 +99,7 @@ public class ProfessorActivity extends AppCompatActivity {
         classes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(ProfessorActivity.this, ClassesProfessor.class));
             }
         });
 
