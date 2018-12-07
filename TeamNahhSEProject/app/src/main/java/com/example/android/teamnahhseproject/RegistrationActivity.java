@@ -64,8 +64,10 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Toast.makeText(RegistrationActivity.this, "The registration was successful!!", Toast.LENGTH_SHORT).show();
                                 User user = new User(name, email);
                                 FirebaseDatabase.getInstance().getReference("student_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
+                                FirebaseDatabase.getInstance().getReference("student_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Classes").child("class0").setValue("-");
 
-                                startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+
+                                startActivity(new Intent(RegistrationActivity.this, AddClassStudentActivity.class));
                             } else {
                                 Toast.makeText(RegistrationActivity.this, "Registration failed, try again later!", Toast.LENGTH_SHORT).show();
                             }

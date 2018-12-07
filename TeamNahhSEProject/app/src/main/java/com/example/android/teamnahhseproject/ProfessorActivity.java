@@ -2,14 +2,19 @@ package com.example.android.teamnahhseproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -38,8 +43,10 @@ public class ProfessorActivity extends AppCompatActivity {
     private TextView currentClass;
     private ImageView imageView;
     private FirebaseDatabase database;
-    private DatabaseReference reference;
+    private DatabaseReference reference, referenceClass;
+    private FirebaseAuth auth;
     Bitmap bitmap;
+    String currentClassString;
     public static final int qrCodeWidth = 500;
     final int minRand = 1000;
     final int maxRand = 9000;
@@ -57,8 +64,11 @@ public class ProfessorActivity extends AppCompatActivity {
         currentClass = (TextView) findViewById(R.id.current_class);
         imageView = (ImageView) findViewById(R.id.imageView);
 
+        auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("code");
+        referenceClass = database.getReference("instructor_users/"+auth.getUid()+"/current_class");
+
 
         /**
          * if attendance history button is clicked then show the attedance of the students in the
@@ -71,10 +81,25 @@ public class ProfessorActivity extends AppCompatActivity {
             }
         });
 
+
+        referenceClass.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentClassString = dataSnapshot.getValue(String.class);
+                database.getReference("poopoo").setValue(currentClassString);
+                currentClass.setText("Current class: "+currentClassString);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
+
+
         /**
          * qrGenerator button is clicked, then generate a random code in and display to user the
          * generated code.
          */
+
         qrGenerator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +126,7 @@ public class ProfessorActivity extends AppCompatActivity {
         classes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(ProfessorActivity.this, ClassesProfessor.class));
             }
         });
 

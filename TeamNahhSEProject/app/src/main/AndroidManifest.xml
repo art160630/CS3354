@@ -30,6 +30,12 @@
         <activity android:name=".ProfessorValidationActivity" />
         <activity android:name=".ProfessorRegistrationPage" />
         <activity android:name=".ProfessorActivity" />
+        <activity android:name=".AddClassStudentActivity"/>
+        <activity android:name=".ClassesProfessor"/>
+        <activity android:name=".ClassesStudent"/>
+        <activity android:name=".ChangeClassProfessor"/>
+        <activity android:name=".ChangeClassStudent"/>
+        <activity android:name=".AddClassProfessor"/>
         <activity android:name=".AttendanceHistoryStudent">
         </activity>
     </application>
