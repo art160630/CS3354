@@ -51,7 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 FirebaseDatabase.getInstance().getReference("student_users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Classes").child("class0").setValue("-");
 
 
-                                startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
+                                startActivity(new Intent(RegistrationActivity.this, AddClassStudentActivity.class));
                             } else {
                                 Toast.makeText(RegistrationActivity.this, "Registration failed, try again later!", Toast.LENGTH_SHORT).show();
                             }

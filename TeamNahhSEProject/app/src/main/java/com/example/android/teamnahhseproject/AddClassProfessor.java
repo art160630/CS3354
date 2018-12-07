@@ -1,5 +1,6 @@
 package com.example.android.teamnahhseproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,7 @@ public class AddClassProfessor extends AppCompatActivity {
     private Button addClassButton;
     String name, classString, semesterString, combinedString;
     FirebaseDatabase database;
-    DatabaseReference referenceNewClass, referenceInstructor;
+    DatabaseReference referenceNewClass, referenceInstructor, referenceCurrentClass;
     FirebaseAuth auth;
 
     @Override
@@ -33,6 +34,7 @@ public class AddClassProfessor extends AppCompatActivity {
         referenceNewClass = database.getReference("classes");
         auth = FirebaseAuth.getInstance();
         referenceInstructor = database.getReference("instructor_users").child(auth.getUid()).child("Classes");
+        referenceCurrentClass = database.getReference("instructor_users").child(auth.getUid()).child("current_class");
 
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +46,9 @@ public class AddClassProfessor extends AppCompatActivity {
                     referenceNewClass.child(combinedString).child("Instructor ID").setValue(auth.getCurrentUser().getUid());
                     referenceNewClass.child(combinedString).child("students").child("student0").setValue("-");
                     referenceInstructor.child(combinedString).setValue("");
+                    referenceCurrentClass.setValue(combinedString);
                     Toast.makeText(AddClassProfessor.this, "Class added successfully.", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddClassProfessor.this, ProfessorActivity.class));
                 }
             }
         });

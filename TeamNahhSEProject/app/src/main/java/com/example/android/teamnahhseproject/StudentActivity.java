@@ -17,6 +17,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.journeyapps.barcodescanner.CaptureActivity;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
@@ -30,11 +32,13 @@ public class StudentActivity extends AppCompatActivity {
     private Button attendanceHistory;
     private Button attend;
     private Button logOut;
-    String dateString;
+    private TextView currentClass;
+    String currentClassString;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference referenceRead = database.getReference("code");
     private DatabaseReference referenceWrite = database.getReference("student_users/"+auth.getUid()+"/Classes/CS_3345_003");
+    private DatabaseReference referenceClass = database.getReference("student_users/"+auth.getUid()+"/current_class");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,17 @@ public class StudentActivity extends AppCompatActivity {
         classes = (Button) findViewById(R.id.classes);
         attendanceHistory = (Button) findViewById(R.id.attendance);
         logOut = (Button) findViewById(R.id.log_out);
+        currentClass = (TextView) findViewById(R.id.current_class);
+        referenceClass.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentClassString = dataSnapshot.getValue(String.class);
+                currentClass.setText("Current class: "+currentClassString);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
         //TODO: change these button names jfc
         attend = (Button) findViewById(R.id.button2);
 

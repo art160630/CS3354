@@ -1,5 +1,6 @@
 package com.example.android.teamnahhseproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -21,10 +22,11 @@ public class AddClassStudentActivity extends AppCompatActivity {
     private EditText classInfo;
     private EditText semesterInfo;
     private Button addClassButton;
-    private boolean found;
-    String name, classString, semesterString, combinedString;
+    boolean found;
+    int f;
+    String name, classString, semesterString, combinedString, getKey;
     FirebaseDatabase database;
-    DatabaseReference referenceClasses, referenceStudents, referenceName, referenceStudentAdd;
+    DatabaseReference referenceClasses, referenceStudents, referenceName, referenceStudentAdd, referenceCurrentClass;
     FirebaseAuth auth;
 
     @Override
@@ -39,6 +41,7 @@ public class AddClassStudentActivity extends AppCompatActivity {
         referenceClasses = database.getReference("classes");
         auth = FirebaseAuth.getInstance();
         referenceName = database.getReference("student_users").child(auth.getUid()).child("name");
+        referenceCurrentClass = database.getReference("student_users").child(auth.getUid()).child("current_class");
 
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,36 +56,39 @@ public class AddClassStudentActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                if (snapshot.getKey().equals(combinedString)) {
+                                if (snapshot.getKey().compareTo(combinedString) == 0) {
                                     found = true;
                                     break;
                                 }
+                            }
+
+                            if(found) {
+                                referenceName.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        name = dataSnapshot.getValue(String.class);
+                                        referenceStudents = database.getReference("classes").child(combinedString).child("students").child(auth.getUid());
+                                        referenceStudents.setValue(name);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) { }
+                                });
+
+                                referenceStudentAdd = database.getReference("student_users").child(auth.getUid()).child("Classes").child(combinedString).child("date0");
+                                referenceStudentAdd.setValue("-");
+                                referenceCurrentClass.setValue(combinedString);
+                                Toast.makeText(AddClassStudentActivity.this, "Class was successfully added.", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(AddClassStudentActivity.this, StudentActivity.class));
+                            }
+                            else {
+                                Toast.makeText(AddClassStudentActivity.this, "Class was not found.", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) { }
                     });
-
-                    if(found) {
-                        referenceName.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                name = dataSnapshot.getValue(String.class);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) { }
-                        });
-                        referenceStudents = database.getReference("classes").child(combinedString).child("students").child(auth.getUid());
-                        referenceStudents.setValue(name);
-                        referenceStudentAdd = database.getReference("student_users").child(auth.getUid()).child("Classes").child(combinedString).child("date0");
-                        referenceStudentAdd.setValue("-");
-                        Toast.makeText(AddClassStudentActivity.this, "Class was successfully added.", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
-                        Toast.makeText(AddClassStudentActivity.this, "Class was not found.", Toast.LENGTH_SHORT).show();
-                    }
 
 
                 }
@@ -102,6 +108,14 @@ public class AddClassStudentActivity extends AppCompatActivity {
         }
         return result;
     }
+
+//    private void setFound(){
+//        f = 1;
+//    }
+//
+//    private int returnFound(){
+//        return f;
+//    }
 
 
 }
