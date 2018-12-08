@@ -25,7 +25,6 @@ public class ProfessorValidationActivity extends AppCompatActivity {
         returnLogin = (TextView) findViewById(R.id.tvReturnLogin);
 
 
-
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,21 +42,19 @@ public class ProfessorValidationActivity extends AppCompatActivity {
         });
 
 
-
     }
+
     //changed to public for testing purposes
-    public void validate(String pass){
-        if(pass.equals("1234")){
+    public void validate(String pass) {
+        if (pass.equals("1234")) {
+            Intent intent = new Intent(ProfessorValidationActivity.this,
+                    ProfessorRegistrationPage.class);
+            startActivity(intent);
             test = true;
         } else {
             Toast.makeText(ProfessorValidationActivity.this,
                     "Wrong Password", Toast.LENGTH_SHORT).show();
             test = false;
         }
-    }
-    public void executeIntent(){
-        Intent intent = new Intent(ProfessorValidationActivity.this,
-                ProfessorRegistrationPage.class);
-        startActivity(intent);
     }
 }
