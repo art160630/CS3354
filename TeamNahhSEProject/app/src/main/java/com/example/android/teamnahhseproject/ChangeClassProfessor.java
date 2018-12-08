@@ -17,6 +17,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * The following activity is the intent that opens up whenever the professor
+ * wants to change the class that they are viewing.
+ *
+ * The page allows for the professor to change the class  they
+ * wish to view.
+ *
+ * author : Alisha Tapiawala
+ * generate: Nov.30th.2018
+ * version : 1.3
+ */
 public class ChangeClassProfessor extends AppCompatActivity {
 
     private EditText newClass;
@@ -43,6 +54,10 @@ public class ChangeClassProfessor extends AppCompatActivity {
         newClass = findViewById(R.id.change_class_text);
         changeClass = findViewById(R.id.change_class_button);
 
+        /**
+         * If the user types in a valid class name then search the database to see if it is a existing class
+         * and if the class exists then switch to it.
+         */
         changeClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +91,10 @@ public class ChangeClassProfessor extends AppCompatActivity {
         });
     }
 
+    /**
+     * The following method validates if the user enters a stirng that is valid
+     * which essentially means that both strings are a valid input.
+     */
     private Boolean validate(String s) {
         Boolean result = false;
 

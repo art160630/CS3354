@@ -16,6 +16,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * The following activity is the intent that opens up whenever the student
+ * accesses their classes
+ *
+ * The page allows for the student to see everything
+ * in their class list.
+ *
+ * author : Alisha Tapiawala
+ * generate: Nov.30th.2018
+ * version : 1.3
+ */
 public class ClassesStudent extends AppCompatActivity {
 
     private Button addClass, changeClass;
@@ -40,6 +51,10 @@ public class ClassesStudent extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         reference = database.getReference("student_users/"+auth.getUid()+"/Classes");
 
+        /**
+         * When the following button is clicked, it traverses through the database
+         * to find the classes that the student is enrolled in.
+         */
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -58,6 +73,9 @@ public class ClassesStudent extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
 
+        /**
+         * When the button for adding class is pressed open up the intent that adds classes for students.
+         */
         addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +84,9 @@ public class ClassesStudent extends AppCompatActivity {
             }
         });
 
+        /**
+         * When the button for adding class is pressed open up the intent that adds classes for students.
+         */
         changeClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

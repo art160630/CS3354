@@ -16,6 +16,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * The following activity is the intent that opens up whenever the professor
+ * wants to view the classes that they teach.
+ *
+ * The page allows for the professor to see everything
+ * in their class list
+ *
+ * author : Alisha Tapiawala
+ * generate: Nov.30th.2018
+ * version : 1.3
+ */
 public class ClassesProfessor extends AppCompatActivity{
 
     private Button addClass, changeClass;
@@ -40,6 +51,10 @@ public class ClassesProfessor extends AppCompatActivity{
         auth = FirebaseAuth.getInstance();
         reference = database.getReference("instructor_users/"+auth.getUid()+"/Classes");
 
+        /**
+         * When the following button is clicked, it traverses through the database
+         * to find the classes that the professor teaches.
+         */
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -58,6 +73,9 @@ public class ClassesProfessor extends AppCompatActivity{
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
 
+        /**
+         * When the button for adding class is pressed open up the intent that adds classes for professors.
+         */
         addClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,6 +84,9 @@ public class ClassesProfessor extends AppCompatActivity{
             }
         });
 
+        /**
+         * When the button for changing class is clicked, then open up the intent that changes classes.
+         */
         changeClass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

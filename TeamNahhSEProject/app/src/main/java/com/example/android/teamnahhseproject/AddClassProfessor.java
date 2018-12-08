@@ -13,6 +13,17 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * The following activity is the intent that opens up whenever a professor
+ * wants to add a class.
+ *
+ * The page allows the professor to create the class and it updates on
+ * FireBase so that students can then enroll in said class.
+ *
+ * author : Alisha Tapiawala
+ * generate: Dec.5th.2018
+ * version : 1.4
+ */
 public class AddClassProfessor extends AppCompatActivity {
     private EditText classInfo;
     private EditText semesterInfo;
@@ -36,6 +47,10 @@ public class AddClassProfessor extends AppCompatActivity {
         referenceInstructor = database.getReference("instructor_users").child(auth.getUid()).child("Classes");
         referenceCurrentClass = database.getReference("instructor_users").child(auth.getUid()).child("current_class");
 
+        /**
+         * When the professor clicks on the add class button it validates whether that is a class or not
+         * and sets the instructor ID to the generated class while updating the database.
+         */
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +71,10 @@ public class AddClassProfessor extends AppCompatActivity {
 
     }
 
+    /**
+     * The following method validates if the two strings are valid, and if the two criteria for
+     * adding a class are followed (making sure that none of the strings are left empty).
+     */
     Boolean validate(String s1, String s2) {
         Boolean result = false;
 

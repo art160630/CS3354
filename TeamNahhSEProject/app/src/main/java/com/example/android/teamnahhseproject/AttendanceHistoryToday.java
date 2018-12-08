@@ -15,6 +15,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
 
+/**
+ * The following activity is the intent that opens up whenever the
+ * professor checks the students that attended that day.
+ *
+ * The page essentially checks the database to see a list of individuals
+ * who were present or absent in one day.
+ *
+ * author : Alisha Tapiawala
+ * generate: Dec.5th.2018
+ * version : 1.4
+ */
 public class AttendanceHistoryToday extends AppCompatActivity {
 
     FirebaseDatabase database;
@@ -41,6 +52,10 @@ public class AttendanceHistoryToday extends AppCompatActivity {
 
         dateString = p.getDate();
 
+        /**
+         * When the referenceCurrentClass button is clicked traverse through Firebase
+         * to check all the students who were present that day.
+         */
         referenceCurrentClass.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

@@ -18,6 +18,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * The following activity is the intent that opens up whenever a student
+ * wants to add a class.
+ *
+ * The page allows the professor to add a class created by a professor
+ * so that they can "attend" said class.
+ *
+ * author : Alisha Tapiawala
+ * generate: Dec.5th.2018
+ * version : 1.4
+ */
 public class AddClassStudentActivity extends AppCompatActivity {
     private EditText classInfo;
     private EditText semesterInfo;
@@ -43,6 +54,11 @@ public class AddClassStudentActivity extends AppCompatActivity {
         referenceName = database.getReference("student_users").child(auth.getUid()).child("name");
         referenceCurrentClass = database.getReference("student_users").child(auth.getUid()).child("current_class");
 
+        /**
+         * When the add class button is clicked, we check to see if the class is one that exists into the
+         * database before we check if we can add it. If the user enters a valid string along with a
+         * course that exists in the database, then they should be added to the class.
+         */
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +113,10 @@ public class AddClassStudentActivity extends AppCompatActivity {
 
 
     }
-
+    /**
+     * The following method validates if the user enters a stirng that is valid
+     * which essentially means that both strings are a valid input.
+     */
     private Boolean validate(String s1, String s2) {
         Boolean result = false;
 
