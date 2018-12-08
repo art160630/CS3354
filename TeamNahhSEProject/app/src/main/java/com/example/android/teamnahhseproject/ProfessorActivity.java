@@ -23,6 +23,8 @@ import com.google.zxing.common.BitMatrix;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -43,10 +45,10 @@ public class ProfessorActivity extends AppCompatActivity {
     private TextView currentClass;
     private ImageView imageView;
     private FirebaseDatabase database;
-    private DatabaseReference reference, referenceClass;
+    private DatabaseReference reference, referenceClass, referenceStudent, referenceAttendance;
     private FirebaseAuth auth;
     Bitmap bitmap;
-    String currentClassString;
+    String currentClassString, studentID, dateString;
     public static final int qrCodeWidth = 500;
     final int minRand = 1000;
     final int maxRand = 9000;
@@ -68,26 +70,14 @@ public class ProfessorActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("code");
         referenceClass = database.getReference("instructor_users/"+auth.getUid()+"/current_class");
-
-
-        /**
-         * if attendance history button is clicked then show the attedance of the students in the
-         * class chosen.
-         */
-        attendanceHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
+        referenceAttendance = database.getReference("student_users");
 
         referenceClass.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentClassString = dataSnapshot.getValue(String.class);
-                database.getReference("poopoo").setValue(currentClassString);
                 currentClass.setText("Current class: "+currentClassString);
+                referenceStudent = database.getReference("classes/"+currentClassString+"/students");
             }
 
             @Override
@@ -114,6 +104,26 @@ public class ProfessorActivity extends AppCompatActivity {
                     imageView.bringToFront();
                     imageView.setVisibility(View.VISIBLE);
 
+                    Date date = new Date();
+                    dateString = date.toString().substring(0, (date.toString().length()) - 18);
+
+                    referenceStudent.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                studentID = snapshot.getKey();
+                                referenceAttendance = database.getReference("student_users/"+studentID+"/Classes/"+
+                                        currentClassString+"/"+dateString);
+                                referenceAttendance.setValue("absent");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
                 } catch (WriterException e) {
                     e.printStackTrace();
                 }
@@ -139,6 +149,17 @@ public class ProfessorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfessorActivity.this, MainActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        /**
+         * if attendance history button is clicked then show the attedance of the students in the
+         * class chosen.
+         */
+        attendanceHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfessorActivity.this, AttendanceHistoryToday.class));
             }
         });
 

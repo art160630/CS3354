@@ -40,14 +40,11 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
         attendanceBox = findViewById(R.id.attendance_box);
         dateBox = findViewById(R.id.date_box);
 
-
-        referenceCurrentClass.addValueEventListener(new ValueEventListener() {
-
         /**
          * when attendance history button is clicked then traverse through FireBase data
          * and show data to the student, along with the date
          */
-        referenceVar.addValueEventListener(new ValueEventListener() {
+        referenceCurrentClass.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentClass = dataSnapshot.getValue(String.class);
@@ -58,10 +55,13 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            attendanceText = postSnapshot.getKey();
-                            dateBox.append(attendanceText + "\n");
-                            attendanceText = postSnapshot.getValue(String.class);
-                            attendanceBox.append(attendanceText + "\n");
+                            if(postSnapshot.getKey().equals("date0")){}
+                            else{
+                                attendanceText = postSnapshot.getKey();
+                                dateBox.append(attendanceText + "\n");
+                                attendanceText = postSnapshot.getValue(String.class);
+                                attendanceBox.append(attendanceText + "\n");
+                            }
                         }
                     }
                     @Override
@@ -74,7 +74,7 @@ public class AttendanceHistoryStudent extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
-
-
     }
 }
+
+

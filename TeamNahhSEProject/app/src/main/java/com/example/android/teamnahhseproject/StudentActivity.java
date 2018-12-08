@@ -138,7 +138,8 @@ public class StudentActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (result.getContents().equals(dataSnapshot.getValue(String.class))) {
                             Date date = new Date();
-                            referenceWrite.child(date.toString()).setValue("present");
+                            String dateString = date.toString().substring(0, (date.toString().length()) - 18);
+                            referenceWrite.child(dateString).setValue("present");
                         }
                     }
 

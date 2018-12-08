@@ -15,6 +15,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
 
 /**
  * The following activity essentially opens up the user's login page
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         newUser = (TextView) findViewById(R.id.tvNewUser);
         studentButton = (RadioButton) findViewById(R.id.student_radio_button);
         instructorButton = (RadioButton) findViewById(R.id.instructor_radio_button);
+
 
         /**
          * if button "login" is clicked validate the user's email and password and
