@@ -25,6 +25,8 @@ public class AttendanceHistoryToday extends AppCompatActivity {
 
     String currentClass, studentID, student, dateString, presence;
 
+    PulledMethods p = new PulledMethods();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +39,7 @@ public class AttendanceHistoryToday extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         referenceCurrentClass = database.getReference("instructor_users/"+auth.getUid()+"/current_class");
 
-        Date date = new Date();
-        dateString = date.toString().substring(0, (date.toString().length()) - 18);
+        dateString = p.getDate();
 
         referenceCurrentClass.addValueEventListener(new ValueEventListener() {
             @Override

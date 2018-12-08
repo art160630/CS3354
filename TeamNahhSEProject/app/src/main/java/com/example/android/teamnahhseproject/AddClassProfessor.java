@@ -56,7 +56,7 @@ public class AddClassProfessor extends AppCompatActivity {
 
     }
 
-    private Boolean validate(String s1, String s2) {
+    Boolean validate(String s1, String s2) {
         Boolean result = false;
 
         if (s1.isEmpty() || s2.isEmpty()) {

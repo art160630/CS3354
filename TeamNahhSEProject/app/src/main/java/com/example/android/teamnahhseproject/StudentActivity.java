@@ -48,6 +48,7 @@ public class StudentActivity extends AppCompatActivity {
     private DatabaseReference referenceRead = database.getReference("code");
     private DatabaseReference referenceWrite;
     private DatabaseReference referenceClass = database.getReference("student_users/"+auth.getUid()+"/current_class");
+    PulledMethods p = new PulledMethods();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,8 +138,7 @@ public class StudentActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (result.getContents().equals(dataSnapshot.getValue(String.class))) {
-                            Date date = new Date();
-                            String dateString = date.toString().substring(0, (date.toString().length()) - 18);
+                            String dateString = p.getDate();
                             referenceWrite.child(dateString).setValue("present");
                         }
                     }

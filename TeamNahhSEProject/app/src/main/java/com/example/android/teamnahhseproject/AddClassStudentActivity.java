@@ -109,13 +109,4 @@ public class AddClassStudentActivity extends AppCompatActivity {
         return result;
     }
 
-//    private void setFound(){
-//        f = 1;
-//    }
-//
-//    private int returnFound(){
-//        return f;
-//    }
-
-
 }

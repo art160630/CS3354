@@ -53,6 +53,7 @@ public class ProfessorActivity extends AppCompatActivity {
     final int minRand = 1000;
     final int maxRand = 9000;
     int random;
+    PulledMethods p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,8 +105,7 @@ public class ProfessorActivity extends AppCompatActivity {
                     imageView.bringToFront();
                     imageView.setVisibility(View.VISIBLE);
 
-                    Date date = new Date();
-                    dateString = date.toString().substring(0, (date.toString().length()) - 18);
+                    dateString = p.getDate();
 
                     referenceStudent.addValueEventListener(new ValueEventListener() {
                         @Override
