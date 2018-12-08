@@ -70,7 +70,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) { }
         });
-        //TODO: change these button names jfc
+
         attend = (Button) findViewById(R.id.button2);
 
         classes.setOnClickListener(new View.OnClickListener() {
