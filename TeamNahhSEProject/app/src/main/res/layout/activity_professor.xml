@@ -107,8 +107,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"
         android:text="log out"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

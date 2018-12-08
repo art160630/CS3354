@@ -67,6 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.761" />
+
     <Button
         android:id="@+id/log_out"
         android:layout_width="wrap_content"
@@ -74,8 +75,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:background="@color/colorAccent"
         android:text="log out"
         android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button.Inverse"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
