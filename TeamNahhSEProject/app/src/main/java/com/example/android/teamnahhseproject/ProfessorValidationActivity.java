@@ -14,6 +14,7 @@ public class ProfessorValidationActivity extends AppCompatActivity {
     private EditText proveProfessor;
     private Button validate;
     private TextView returnLogin;
+    boolean test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,19 @@ public class ProfessorValidationActivity extends AppCompatActivity {
 
 
     }
-    private void validate(String pass){
+    //changed to public for testing purposes
+    public void validate(String pass){
         if(pass.equals("1234")){
-            Intent intent = new Intent(ProfessorValidationActivity.this, ProfessorRegistrationPage.class);
-            startActivity(intent);
+            test = true;
         } else {
-            Toast.makeText(ProfessorValidationActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfessorValidationActivity.this,
+                    "Wrong Password", Toast.LENGTH_SHORT).show();
+            test = false;
         }
+    }
+    public void executeIntent(){
+        Intent intent = new Intent(ProfessorValidationActivity.this,
+                ProfessorRegistrationPage.class);
+        startActivity(intent);
     }
 }
